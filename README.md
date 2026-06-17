@@ -1,82 +1,120 @@
-# Hamming Network Project
+# Hamming Network for Pattern Recognition
 
 ## Overview
-This project implements a Hamming neural network designed for recognizing patterns, such as English uppercase letters, represented in binary format. The implementation includes a standard Hamming network and an enhanced version that improves performance and error tolerance. The network is trained and tested using provided datasets.
 
-## Features
-- **hamming_net.py**: Contains the core implementation of the standard Hamming network.
-- **improve_hamming.py**: Introduces an improved version of the Hamming network, optimizing recall accuracy and error handling.
-- **Hamming network.pptx**: A presentation explaining the network's theory, implementation, and performance.
-- **letters_train.csv**: Dataset containing training patterns for the network.
-- **letters_train_shifted_right_padded.csv**: A modified version of the training data to test the network's adaptability.
-- **letters_test.csv**: Dataset used for testing the network's recall capability.
+This project implements a Hamming Network for recognizing binary patterns, with a focus on classifying uppercase English letters represented as 8x8 binary images.
 
-## Structure
-```
-hamming_network/
+The project includes a basic Hamming Network implementation and an improved version designed to handle noisy or slightly shifted input patterns more robustly. The network compares input patterns to stored training patterns and returns the closest matching class using similarity-based classification.
+
+This project was developed as part of an academic neural networks assignment and demonstrates pattern recognition, binary vector representation, similarity scoring, and robustness testing.
+
+## Main Features
+
+* Pattern recognition using a Hamming Network
+* Classification of uppercase letters represented as binary vectors
+* One-hot encoded output labels
+* Testing on clean input patterns
+* Testing with noisy input patterns
+* Testing with shifted letter patterns
+* Improved similarity calculation for more tolerant pattern matching
+* Colored terminal output for easier result analysis
+
+## Project Files
+
+```text
+.
 ├── hamming_net.py
 ├── improve_hamming.py
-├── Hamming network.pptx
 ├── letters_train.csv
-├── letters_train_shifted_right_padded.csv
 ├── letters_test.csv
-├── .git
-├── .gitattributes
+├── letters_train_shifted_right_padded.csv
+├── Hamming network.pptx
+└── README.md
 ```
 
-### File Descriptions
-- **hamming_net.py**: Implements the standard Hamming network algorithm using binary vectors for pattern recognition.
-- **improve_hamming.py**: Enhances the standard implementation with features such as:
-  - Increased tolerance for noisy inputs.
-  - Optimized weight calculation and pattern matching.
-  - Adaptive learning for dynamic data.
-- **Hamming network.pptx**: Explains the network's concept and provides visual insights into its implementation.
-- **letters_train.csv**: Provides training data for the network, including binary representations of patterns.
-- **letters_train_shifted_right_padded.csv**: Modified training data for testing robustness.
-- **letters_test.csv**: Test data for evaluating the network's performance.
+## Implementation Details
 
-## Enhancements in `improve_hamming.py`
-- **Error Tolerance**: Handles noisy or incomplete patterns more effectively.
-- **Optimized Recall**: Improves the accuracy and speed of pattern recognition.
-- **Dynamic Learning**: Supports incremental training with new patterns.
+### Basic Hamming Network
 
-## Usage
-### Prerequisites
-- Python 3.7 or higher.
-- Required libraries: NumPy, pandas.
+The basic implementation stores binary training patterns and compares a given input pattern to all stored patterns.
 
-Install the required libraries using pip:
+For each input, the network calculates a similarity score against every stored pattern and returns the label of the closest match.
+
+### Improved Hamming Network
+
+The improved implementation represents each input pattern as an 8x8 matrix and uses a more flexible similarity calculation.
+
+In addition to checking exact pixel matches, the improved version also considers nearby pixels. This helps the network handle small shifts or distortions in the input pattern.
+
+## Dataset
+
+The project uses CSV files containing binary representations of letters:
+
+* `letters_train.csv` - training patterns
+* `letters_test.csv` - test patterns
+* `letters_train_shifted_right_padded.csv` - shifted patterns used to test robustness
+
+Each letter is represented as a binary pattern, and the output label is represented using one-hot encoding.
+
+## How It Works
+
+1. Load binary letter patterns from CSV files.
+2. Store the training patterns in the Hamming Network.
+3. Compare each test pattern to the stored patterns.
+4. Compute similarity scores.
+5. Select the closest matching pattern.
+6. Convert the predicted one-hot vector into a letter.
+7. Evaluate the prediction against the expected label.
+
+## Technologies Used
+
+* Python
+* NumPy
+* Pandas
+* Pattern Recognition
+* Neural Networks
+* Similarity-Based Classification
+
+## How to Run
+
+Install the required packages:
+
 ```bash
-pip install numpy pandas
+pip install numpy pandas colorama
 ```
 
-### Training and Testing
-1. **Standard Hamming Network**:
-   Run the `hamming_net.py` script:
-   ```bash
-   python hamming_net.py
-   ```
-   This script trains the Hamming network using `letters_train.csv` and tests it with `letters_test.csv`.
+Run the basic implementation:
 
-2. **Enhanced Hamming Network**:
-   Run the `improve_hamming.py` script:
-   ```bash
-   python improve_hamming.py
-   ```
-   This script trains the enhanced network and demonstrates improved recall performance with noisy or modified test data.
+```bash
+python hamming_net.py
+```
 
-### Input and Output
-- **Input**: Binary patterns representing letters or other data.
-- **Output**: Predicted patterns or performance metrics.
+Run the improved implementation:
 
-## Example
-### Standard Hamming Network
-Input: Noisy representation of a pattern.
-Output: Correctly recalled pattern or closest match.
+```bash
+python improve_hamming.py
+```
 
-### Enhanced Hamming Network
-Input: Heavily distorted or padded representation of a pattern.
-Output: Accurate recall due to improved error handling.
+## What I Learned
 
+This project helped me understand how simple neural network models can be used for pattern recognition tasks.
 
+Through this project, I practiced:
 
+* Representing visual patterns as binary vectors
+* Implementing a Hamming Network from scratch
+* Working with one-hot encoded labels
+* Comparing patterns using similarity scores
+* Testing model robustness with noisy and shifted inputs
+* Improving a baseline implementation through more flexible matching logic
+
+## Future Improvements
+
+Possible future improvements include:
+
+* Adding automated accuracy comparison between the basic and improved implementations
+* Visualizing the 8x8 letter patterns
+* Adding more distorted test examples
+* Supporting additional pattern categories
+* Refactoring the code into reusable modules
+* Adding unit tests for the similarity and classification functions
